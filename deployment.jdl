@@ -1,0 +1,15 @@
+/**
+ * Deployments
+ */
+
+deployment {
+  deploymentType kubernetes
+  appsFolders [store, invoice, notification, product]
+  dockerRepositoryName "deepu105"
+  serviceDiscoveryType no
+  istio true
+  kubernetesServiceType Ingress
+  kubernetesNamespace jhipster
+  ingressDomain "<istio-ingress-public-ip>.nip.io"
+  ingressType gke
+}
