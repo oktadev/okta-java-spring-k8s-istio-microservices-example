@@ -1,0 +1,50 @@
+{
+  "name": "Notification",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sentDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "format",
+      "fieldType": "NotificationType",
+      "fieldValues": "EMAIL,SMS,PARCEL",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "productId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [],
+  "javadoc": "Entities for notification microservice",
+  "entityTableName": "notification",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["store", "notification"],
+  "microserviceName": "notification",
+  "clientRootFolder": "notification",
+  "databaseType": "mongodb",
+  "changelogDate": "20211216152609"
+}

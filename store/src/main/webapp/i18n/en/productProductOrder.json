@@ -1,0 +1,33 @@
+{
+  "storeApp": {
+    "productProductOrder": {
+      "home": {
+        "title": "Product Orders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Order",
+        "createOrEditLabel": "Create or edit a Product Order",
+        "notFound": "No Product Orders found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Product Order {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Order"
+      },
+      "id": "ID",
+      "placedDate": "Placed Date",
+      "status": "Status",
+      "code": "Code",
+      "invoiceId": "Invoice Id",
+      "customer": "Customer",
+      "orderItem": "Order Item"
+    }
+  },
+  "productApp": {
+    "productProductOrder": {
+      "created": "A new Product Order is created with identifier {{ param }}",
+      "updated": "A Product Order is updated with identifier {{ param }}",
+      "deleted": "A Product Order is deleted with identifier {{ param }}"
+    }
+  }
+}

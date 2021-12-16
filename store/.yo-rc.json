@@ -1,0 +1,65 @@
+{
+  "generator-jhipster": {
+    "authenticationType": "oauth2",
+    "clientFramework": "react",
+    "serverPort": "8080",
+    "serviceDiscoveryType": false,
+    "skipUserManagement": true,
+    "withAdminUi": true,
+    "baseName": "store",
+    "buildTool": "gradle",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "cacheProvider": "no",
+    "enableHibernateCache": false,
+    "enableSwaggerCodegen": false,
+    "enableTranslation": true,
+    "jhiPrefix": "jhi",
+    "languages": ["en"],
+    "messageBroker": false,
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "testFrameworks": [],
+    "websocket": false,
+    "enableGradleEnterprise": false,
+    "gradleEnterpriseHost": "",
+    "applicationType": "gateway",
+    "packageName": "com.okta.developer.store",
+    "packageFolder": "com/okta/developer/store",
+    "jhipsterVersion": "7.4.0",
+    "clientPackageManager": "npm",
+    "dtoSuffix": "DTO",
+    "entitySuffix": "",
+    "reactive": true,
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "applicationIndex": 0,
+    "applications": {
+      "product": {
+        "serverPort": "8081",
+        "applicationIndex": 1
+      },
+      "invoice": {
+        "serverPort": "8082",
+        "applicationIndex": 2
+      },
+      "notification": {
+        "serverPort": "8083",
+        "applicationIndex": 3
+      }
+    },
+    "skipCheckLengthOfIdentifier": false,
+    "skipFakeData": false,
+    "blueprints": [],
+    "otherModules": [],
+    "pages": [],
+    "nativeLanguage": "en",
+    "creationTimestamp": 1639668309406,
+    "monorepository": true,
+    "skipCommitHook": true,
+    "jwtSecretKey": "ZTQ3NmE2MTFjOTEzZjNlNTc0NDAyNzNjZjMyYjY1YmVkY2ZlYjViZjAxZjdiMjI5MjFjZWUxM2M5YjMxM2NhMWI3NWI0ZDg0ODY1NGZmMWZmOGNmYzk1MDQ5N2ZkNWFiN2IzYTIzZTc4NGMyNTA2YzQxZmM1YmMwZTQ3NjBkYmE=",
+    "devServerPort": 9060,
+    "entities": ["Customer", "Product", "ProductCategory", "ProductOrder", "OrderItem", "Invoice", "Shipment", "Notification"],
+    "lastLiquibaseTimestamp": 1639668789000
+  }
+}
