@@ -2,6 +2,7 @@
  * Deployments
  */
 
+// will be created under 'kubernetes' folder
 deployment {
   deploymentType kubernetes
   appsFolders [store, invoice, notification, product]
@@ -10,6 +11,6 @@ deployment {
   istio true
   kubernetesServiceType Ingress
   kubernetesNamespace jhipster
-  ingressDomain "<istio-ingress-public-ip>.nip.io"
+  ingressDomain "34.147.55.71.nip.io"
   ingressType gke
 }

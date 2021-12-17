@@ -1,0 +1,21 @@
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+    - image: deepu105/store
+      context: ../store
+      jib: {}
+    - image: deepu105/invoice
+      context: ../invoice
+      jib: {}
+    - image: deepu105/notification
+      context: ../notification
+      jib: {}
+    - image: deepu105/product
+      context: ../product
+      jib: {}
+  tagPolicy:
+    envTemplate:
+      template: "{{.IMAGE_NAME}}:latest"
+deploy:
+  kustomize: {}
