@@ -10,7 +10,7 @@
     "kubernetesServiceType": "Ingress",
     "kubernetesUseDynamicStorage": false,
     "kubernetesStorageClassName": "",
-    "ingressDomain": "34.147.55.71.nip.io",
+    "ingressDomain": "34.141.190.82.nip.io",
     "monitoring": "no",
     "istio": true,
     "deploymentType": "kubernetes",

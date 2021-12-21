@@ -15,13 +15,13 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - zipkin.istio-system.34.147.55.71.nip.io
+        - zipkin.istio-system.34.141.190.82.nip.io
     - port:
         number: 80
         name: http2
         protocol: HTTP2
       hosts:
-        - zipkin.istio-system.34.147.55.71.nip.io
+        - zipkin.istio-system.34.141.190.82.nip.io
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -30,7 +30,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - zipkin.istio-system.34.147.55.71.nip.io
+    - zipkin.istio-system.34.141.190.82.nip.io
   gateways:
     - zipkin-observability-gateway
   http:

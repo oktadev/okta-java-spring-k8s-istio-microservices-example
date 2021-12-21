@@ -18,13 +18,13 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - store.jhipster.34.147.55.71.nip.io
+        - store.jhipster.34.141.190.82.nip.io
     - port:
         number: 80
         name: http2
         protocol: HTTP2
       hosts:
-        - store.jhipster.34.147.55.71.nip.io
+        - store.jhipster.34.141.190.82.nip.io
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -35,7 +35,7 @@ metadata:
     service: store-gw-virtualservice
 spec:
   hosts:
-    - store.jhipster.34.147.55.71.nip.io
+    - store.jhipster.34.141.190.82.nip.io
   gateways:
     - store-gateway
   http:
