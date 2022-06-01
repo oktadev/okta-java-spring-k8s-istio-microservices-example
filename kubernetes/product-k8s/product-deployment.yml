@@ -46,7 +46,7 @@ spec:
               done
       containers:
         - name: product-app
-          image: deepu105/product
+          image: deepu105/product-istio
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: prod
@@ -68,14 +68,15 @@ spec:
             - name: SERVER_SHUTDOWN
               value: graceful
             - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI
-              value: https://dev-7163545.okta.com/oauth2/default
+              value: https://deepu.oktapreview.com/oauth2/default
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID
-              value: 0oa3cwm84pxmGPQTz5d7
+              value: 0oa3qwmfx2XkA6KsK1d7
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: okta-oidc
-                  key: oidc-client-secret
+              value: lajpB8Dz6Qre2YNIRXp6FaKr40skmv36oFwOYIwm
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: okta-oidc
+              #     key: oidc-client-secret
           resources:
             requests:
               memory: "512Mi"
