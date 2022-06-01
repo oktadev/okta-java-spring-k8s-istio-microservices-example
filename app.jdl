@@ -1,7 +1,7 @@
 
 /*
  * This is a microservice e-commerce store sample with Gateway and three microservice applications
- * This uses Istio for native kubernetes service discovery and oauth2 authentication
+ * This uses Istio for native kubernetes service discovery and jwt authentication
  * This also creates the required Kubernetes deployment manifests and Istio routes
  */
  
@@ -11,7 +11,7 @@ application {
     applicationType gateway
     packageName com.okta.developer.store
     serviceDiscoveryType no
-    authenticationType oauth2
+    authenticationType jwt
     prodDatabaseType postgresql
     cacheProvider hazelcast
     buildTool gradle
@@ -27,7 +27,7 @@ application {
     applicationType microservice
     packageName com.okta.developer.product
     serviceDiscoveryType no
-    authenticationType oauth2
+    authenticationType jwt
     prodDatabaseType postgresql
     cacheProvider hazelcast
     buildTool gradle
@@ -42,7 +42,7 @@ application {
     applicationType microservice
     packageName com.okta.developer.invoice
     serviceDiscoveryType no
-    authenticationType oauth2
+    authenticationType jwt
     prodDatabaseType postgresql
     buildTool gradle
     serverPort 8082
@@ -56,7 +56,7 @@ application {
     applicationType microservice
     packageName com.okta.developer.notification
     serviceDiscoveryType no
-    authenticationType oauth2
+    authenticationType jwt
     databaseType mongodb
     cacheProvider no
     enableHibernateCache false

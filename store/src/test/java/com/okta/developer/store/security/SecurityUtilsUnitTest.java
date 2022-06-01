@@ -1,10 +1,9 @@
 package com.okta.developer.store.security;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames.ID_TOKEN;
 
-import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +25,15 @@ class SecurityUtilsUnitTest {
             .contextWrite(ReactiveSecurityContextHolder.withAuthentication(new UsernamePasswordAuthenticationToken("admin", "admin")))
             .block();
         assertThat(login).isEqualTo("admin");
+    }
+
+    @Test
+    void testgetCurrentUserJWT() {
+        String jwt = SecurityUtils
+            .getCurrentUserJWT()
+            .contextWrite(ReactiveSecurityContextHolder.withAuthentication(new UsernamePasswordAuthenticationToken("admin", "token")))
+            .block();
+        assertThat(jwt).isEqualTo("token");
     }
 
     @Test

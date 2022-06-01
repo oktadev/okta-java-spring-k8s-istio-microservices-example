@@ -3,7 +3,6 @@ package com.okta.developer.invoice.web.rest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -127,12 +126,7 @@ class ShipmentResourceIT {
         int databaseSizeBeforeCreate = shipmentRepository.findAll().size();
         // Create the Shipment
         restShipmentMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(shipment))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(shipment)))
             .andExpect(status().isCreated());
 
         // Validate the Shipment in the database
@@ -154,12 +148,7 @@ class ShipmentResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restShipmentMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(shipment))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(shipment)))
             .andExpect(status().isBadRequest());
 
         // Validate the Shipment in the database
@@ -177,12 +166,7 @@ class ShipmentResourceIT {
         // Create the Shipment, which fails.
 
         restShipmentMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(shipment))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(shipment)))
             .andExpect(status().isBadRequest());
 
         List<Shipment> shipmentList = shipmentRepository.findAll();
@@ -265,7 +249,6 @@ class ShipmentResourceIT {
         restShipmentMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedShipment.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(updatedShipment))
             )
@@ -290,7 +273,6 @@ class ShipmentResourceIT {
         restShipmentMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, shipment.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(shipment))
             )
@@ -311,7 +293,6 @@ class ShipmentResourceIT {
         restShipmentMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(shipment))
             )
@@ -330,12 +311,7 @@ class ShipmentResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
-            .perform(
-                put(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(shipment))
-            )
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(shipment)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Shipment in the database
@@ -360,7 +336,6 @@ class ShipmentResourceIT {
         restShipmentMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedShipment.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedShipment))
             )
@@ -392,7 +367,6 @@ class ShipmentResourceIT {
         restShipmentMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedShipment.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedShipment))
             )
@@ -417,7 +391,6 @@ class ShipmentResourceIT {
         restShipmentMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, shipment.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(shipment))
             )
@@ -438,7 +411,6 @@ class ShipmentResourceIT {
         restShipmentMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(shipment))
             )
@@ -457,12 +429,7 @@ class ShipmentResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
-            .perform(
-                patch(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(shipment))
-            )
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(shipment)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Shipment in the database
@@ -480,7 +447,7 @@ class ShipmentResourceIT {
 
         // Delete the shipment
         restShipmentMockMvc
-            .perform(delete(ENTITY_API_URL_ID, shipment.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, shipment.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

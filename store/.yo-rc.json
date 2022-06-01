@@ -16,7 +16,7 @@
         "serverPort": "8081"
       }
     },
-    "authenticationType": "oauth2",
+    "authenticationType": "jwt",
     "baseName": "store",
     "blueprints": [],
     "buildTool": "gradle",
@@ -25,7 +25,7 @@
     "clientPackageManager": "npm",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "creationTimestamp": 1654085323343,
+    "creationTimestamp": 1654090158252,
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
     "devServerPort": 9060,
@@ -39,9 +39,9 @@
     "gradleEnterpriseHost": "",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "7.8.1",
-    "jwtSecretKey": "NjU5ZTc0OTZiMWY1MjExOTY2Nzk4YjYwYzM5MGIyN2YwNDBlYjZhYjU3ZDdhNTRkMjg0ZmY2NzNlNWM1OWExMDlhYWJlNmI1ZDQ0ZDVlZDVjODBmYWU5MTdlNmEzMDdlMGIwYmNiM2E5ZTJjM2FiY2NmYTg2ZGNkYWUzZDhiOWU=",
+    "jwtSecretKey": "MjQ1OTEyZTg0ZmQ2OGU0YmM0MDMzYTQyMzU0ZWEwZDlkOTc4ZDkwYjZkMjMwZmFiOGU1ZjkyZTMyZjhlZDNiNWI2YTlhN2E2NDIwNWQ3ZTMzNmZhMTliM2UzMmQzYWM4MjEyYTc0MGZkMzBhMzlhMjA4MjA0Njk1YmYyMzljNDc=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1654085803000,
+    "lastLiquibaseTimestamp": 1654090638000,
     "messageBroker": false,
     "monorepository": true,
     "nativeLanguage": "en",
@@ -57,7 +57,7 @@
     "skipCheckLengthOfIdentifier": false,
     "skipCommitHook": true,
     "skipFakeData": false,
-    "skipUserManagement": true,
+    "skipUserManagement": false,
     "testFrameworks": [],
     "websocket": false,
     "withAdminUi": true

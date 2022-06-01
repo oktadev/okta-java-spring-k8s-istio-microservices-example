@@ -2,7 +2,6 @@ package com.okta.developer.notification;
 
 import com.okta.developer.notification.NotificationApp;
 import com.okta.developer.notification.config.EmbeddedMongo;
-import com.okta.developer.notification.config.TestSecurityConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -14,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest(classes = { NotificationApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = NotificationApp.class)
 @EmbeddedMongo
 public @interface IntegrationTest {
 }

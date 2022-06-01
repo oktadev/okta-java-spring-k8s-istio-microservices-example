@@ -9,7 +9,7 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IUser } from 'app/shared/model/user.model';
-import { getUsers } from 'app/shared/reducers/user-management';
+import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
 import { ICustomer } from 'app/shared/model/customer.model';
 import { Gender } from 'app/shared/model/enumerations/gender.model';
 import { getEntity, updateEntity, createEntity, reset } from './customer.reducer';

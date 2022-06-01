@@ -43,12 +43,6 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
-            createCache(cm, "oAuth2Authentication");
-            createCache(cm, com.okta.developer.invoice.repository.UserRepository.USERS_BY_LOGIN_CACHE);
-            createCache(cm, com.okta.developer.invoice.repository.UserRepository.USERS_BY_EMAIL_CACHE);
-            createCache(cm, com.okta.developer.invoice.domain.User.class.getName());
-            createCache(cm, com.okta.developer.invoice.domain.Authority.class.getName());
-            createCache(cm, com.okta.developer.invoice.domain.User.class.getName() + ".authorities");
             createCache(cm, com.okta.developer.invoice.domain.Invoice.class.getName());
             createCache(cm, com.okta.developer.invoice.domain.Invoice.class.getName() + ".shipments");
             createCache(cm, com.okta.developer.invoice.domain.Shipment.class.getName());

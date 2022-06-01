@@ -225,15 +225,20 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-starter"
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
     implementation "org.springframework.retry:spring-retry"
-    implementation "org.springframework.cloud:spring-cloud-starter-security"
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
     implementation "com.playtika.reactivefeign:feign-reactor-webclient"
     implementation "com.playtika.reactivefeign:feign-reactor-cloud"
     implementation "com.playtika.reactivefeign:feign-reactor-spring-configuration"
     implementation "org.springframework.security:spring-security-config"
     implementation "org.springframework.security:spring-security-web"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
+    implementation "io.jsonwebtoken:jjwt-api"
+    if (!project.hasProperty("gae")) {
+        runtimeOnly "io.jsonwebtoken:jjwt-impl"
+        implementation "io.jsonwebtoken:jjwt-jackson"
+    } else {
+        implementation "io.jsonwebtoken:jjwt-impl"
+        implementation "io.jsonwebtoken:jjwt-jackson"
+    }
     implementation ("org.springdoc:springdoc-openapi-webmvc-core")
     implementation "org.postgresql:postgresql"
     implementation "io.r2dbc:r2dbc-postgresql"

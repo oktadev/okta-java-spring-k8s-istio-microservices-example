@@ -1,11 +1,11 @@
 id;placed_date;status;code;invoice_id;customer
-1;2022-06-01T03:56:33;COMPLETED;Electronics;57858;calculate
-2;2022-06-01T02:40:23;CANCELLED;one-to-one Corporate;74608;Steel
-3;2022-05-31T18:07:50;CANCELLED;cross-platform Health;12251;real-time
-4;2022-05-31T20:54:35;CANCELLED;Hat;10576;Square revolutionize
-5;2022-06-01T03:58:04;CANCELLED;implement Implementation;23738;Bike
-6;2022-05-31T19:09:25;CANCELLED;Industrial Checking Right-sized;52549;models
-7;2022-05-31T19:21:33;PENDING;Implemented;30578;Home
-8;2022-05-31T23:20:34;CANCELLED;Handmade Automotive Principal;60178;success Liaison Riel
-9;2022-06-01T04:08:20;COMPLETED;National Program;95175;neural hacking
-10;2022-06-01T04:01:20;COMPLETED;hack Shirt Walks;57700;full-range back
+1;2022-06-01T05:17:08;COMPLETED;Electronics;57858;calculate
+2;2022-06-01T04:00:58;CANCELLED;one-to-one Corporate;74608;Steel
+3;2022-05-31T19:28:25;CANCELLED;cross-platform Health;12251;real-time
+4;2022-05-31T22:15:10;CANCELLED;Hat;10576;Square revolutionize
+5;2022-06-01T05:18:39;CANCELLED;implement Implementation;23738;Bike
+6;2022-05-31T20:30:00;CANCELLED;Industrial Checking Right-sized;52549;models
+7;2022-05-31T20:42:08;PENDING;Implemented;30578;Home
+8;2022-06-01T00:41:09;CANCELLED;Handmade Automotive Principal;60178;success Liaison Riel
+9;2022-06-01T05:28:55;COMPLETED;National Program;95175;neural hacking
+10;2022-06-01T05:21:55;COMPLETED;hack Shirt Walks;57700;full-range back

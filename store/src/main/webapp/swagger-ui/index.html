@@ -25,17 +25,18 @@
       };
 
       window.onload = async function () {
-        function getCSRF() {
-          var name = 'XSRF-TOKEN=';
-          var ca = document.cookie.split(';');
-          for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) === ' ') c = c.substring(1);
-            if (c.indexOf(name) !== -1) return c.substring(name.length, c.length);
+        const getBearerToken = () => {
+          var authToken = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
+          if (authToken) {
+            authToken = JSON.parse(authToken);
+            return `Bearer ${authToken}`;
           }
-          return '';
-        }
-        const axiosConfig = { timeout: 5000 };
+          return null;
+        };
+        const axiosConfig = {
+          timeout: 5000,
+          headers: { Authorization: getBearerToken() },
+        };
 
         const baseUrl = '/v3/api-docs';
         let urls;
@@ -73,7 +74,7 @@
           plugins: [SwaggerUIBundle.plugins.DownloadUrl, AlwaysEnableTryItOutPlugin],
           tryItOutEnabled: true,
           requestInterceptor: function (req) {
-            req.headers['X-XSRF-TOKEN'] = getCSRF();
+            req.headers['Authorization'] = getBearerToken();
             // Remove the sample Swagger UI request body if present
             if (req.method === 'GET' && req.body === '{"additionalProp1":"string","additionalProp2":"string","additionalProp3":"string"}') {
               req.body = undefined;

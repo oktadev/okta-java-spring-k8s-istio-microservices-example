@@ -1,7 +1,6 @@
 package com.okta.developer.invoice;
 
 import com.okta.developer.invoice.InvoiceApp;
-import com.okta.developer.invoice.config.TestSecurityConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -13,6 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest(classes = { InvoiceApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = InvoiceApp.class)
 public @interface IntegrationTest {
 }

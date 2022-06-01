@@ -1,7 +1,6 @@
 package com.okta.developer.product;
 
 import com.okta.developer.product.ProductApp;
-import com.okta.developer.product.config.TestSecurityConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -13,6 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest(classes = { ProductApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = ProductApp.class)
 public @interface IntegrationTest {
 }

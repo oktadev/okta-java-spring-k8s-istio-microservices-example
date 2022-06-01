@@ -4,7 +4,6 @@ import static com.okta.developer.product.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -128,12 +127,7 @@ class ProductResourceIT {
         int databaseSizeBeforeCreate = productRepository.findAll().size();
         // Create the Product
         restProductMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(product))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(product)))
             .andExpect(status().isCreated());
 
         // Validate the Product in the database
@@ -158,12 +152,7 @@ class ProductResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restProductMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(product))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(product)))
             .andExpect(status().isBadRequest());
 
         // Validate the Product in the database
@@ -181,12 +170,7 @@ class ProductResourceIT {
         // Create the Product, which fails.
 
         restProductMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(product))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(product)))
             .andExpect(status().isBadRequest());
 
         List<Product> productList = productRepository.findAll();
@@ -203,12 +187,7 @@ class ProductResourceIT {
         // Create the Product, which fails.
 
         restProductMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(product))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(product)))
             .andExpect(status().isBadRequest());
 
         List<Product> productList = productRepository.findAll();
@@ -225,12 +204,7 @@ class ProductResourceIT {
         // Create the Product, which fails.
 
         restProductMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(product))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(product)))
             .andExpect(status().isBadRequest());
 
         List<Product> productList = productRepository.findAll();
@@ -325,7 +299,6 @@ class ProductResourceIT {
         restProductMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedProduct.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(updatedProduct))
             )
@@ -353,7 +326,6 @@ class ProductResourceIT {
         restProductMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, product.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(product))
             )
@@ -374,7 +346,6 @@ class ProductResourceIT {
         restProductMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(product))
             )
@@ -393,9 +364,7 @@ class ProductResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProductMockMvc
-            .perform(
-                put(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(product))
-            )
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(product)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Product in the database
@@ -420,7 +389,6 @@ class ProductResourceIT {
         restProductMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedProduct.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedProduct))
             )
@@ -461,7 +429,6 @@ class ProductResourceIT {
         restProductMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedProduct.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedProduct))
             )
@@ -489,7 +456,6 @@ class ProductResourceIT {
         restProductMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, product.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(product))
             )
@@ -510,7 +476,6 @@ class ProductResourceIT {
         restProductMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(product))
             )
@@ -529,12 +494,7 @@ class ProductResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProductMockMvc
-            .perform(
-                patch(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(product))
-            )
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(product)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Product in the database
@@ -552,7 +512,7 @@ class ProductResourceIT {
 
         // Delete the product
         restProductMockMvc
-            .perform(delete(ENTITY_API_URL_ID, product.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, product.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

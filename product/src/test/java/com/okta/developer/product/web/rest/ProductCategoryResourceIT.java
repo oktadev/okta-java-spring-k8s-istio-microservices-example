@@ -2,7 +2,6 @@ package com.okta.developer.product.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -87,10 +86,7 @@ class ProductCategoryResourceIT {
         // Create the ProductCategory
         restProductCategoryMockMvc
             .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(productCategory))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(productCategory))
             )
             .andExpect(status().isCreated());
 
@@ -113,10 +109,7 @@ class ProductCategoryResourceIT {
         // An entity with an existing ID cannot be created, so this API call must fail
         restProductCategoryMockMvc
             .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(productCategory))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(productCategory))
             )
             .andExpect(status().isBadRequest());
 
@@ -136,10 +129,7 @@ class ProductCategoryResourceIT {
 
         restProductCategoryMockMvc
             .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(productCategory))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(productCategory))
             )
             .andExpect(status().isBadRequest());
 
@@ -203,7 +193,6 @@ class ProductCategoryResourceIT {
         restProductCategoryMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedProductCategory.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(updatedProductCategory))
             )
@@ -227,7 +216,6 @@ class ProductCategoryResourceIT {
         restProductCategoryMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, productCategory.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(productCategory))
             )
@@ -248,7 +236,6 @@ class ProductCategoryResourceIT {
         restProductCategoryMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(productCategory))
             )
@@ -268,10 +255,7 @@ class ProductCategoryResourceIT {
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProductCategoryMockMvc
             .perform(
-                put(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(productCategory))
+                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(productCategory))
             )
             .andExpect(status().isMethodNotAllowed());
 
@@ -297,7 +281,6 @@ class ProductCategoryResourceIT {
         restProductCategoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedProductCategory.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedProductCategory))
             )
@@ -328,7 +311,6 @@ class ProductCategoryResourceIT {
         restProductCategoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedProductCategory.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedProductCategory))
             )
@@ -352,7 +334,6 @@ class ProductCategoryResourceIT {
         restProductCategoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, productCategory.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(productCategory))
             )
@@ -373,7 +354,6 @@ class ProductCategoryResourceIT {
         restProductCategoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(productCategory))
             )
@@ -394,7 +374,6 @@ class ProductCategoryResourceIT {
         restProductCategoryMockMvc
             .perform(
                 patch(ENTITY_API_URL)
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(productCategory))
             )
@@ -415,7 +394,7 @@ class ProductCategoryResourceIT {
 
         // Delete the productCategory
         restProductCategoryMockMvc
-            .perform(delete(ENTITY_API_URL_ID, productCategory.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, productCategory.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

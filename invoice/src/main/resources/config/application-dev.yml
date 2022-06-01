@@ -89,6 +89,14 @@ jhipster:
   #   exposed-headers: "Authorization,Link,X-Total-Count"
   #   allow-credentials: true
   #   max-age: 1800
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+        base64-secret: M2I3MGIzZTRlMmE5NThmODJhNTA3ZDY0YzNkOWRkNDM4ZWJiNzI1MWUyZjM1MjgxMWE5YjhhMzIyMjg2YzdkNDY2MTVlODI4MjE1NjJhODBmYTk4ZDVjMjIzNWM4ZDBmMzliZTFhNDc0MmVlZDA2MGM4MDRmYmNkYjI4MTgyY2Y=
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
+        token-validity-in-seconds-for-remember-me: 2592000
   logging:
     use-json-format: false # By default, logs are not in Json format
     logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration

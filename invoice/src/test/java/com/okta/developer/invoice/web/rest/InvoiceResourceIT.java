@@ -3,7 +3,6 @@ package com.okta.developer.invoice.web.rest;
 import static com.okta.developer.invoice.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -121,12 +120,7 @@ class InvoiceResourceIT {
         int databaseSizeBeforeCreate = invoiceRepository.findAll().size();
         // Create the Invoice
         restInvoiceMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isCreated());
 
         // Validate the Invoice in the database
@@ -152,12 +146,7 @@ class InvoiceResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restInvoiceMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isBadRequest());
 
         // Validate the Invoice in the database
@@ -175,12 +164,7 @@ class InvoiceResourceIT {
         // Create the Invoice, which fails.
 
         restInvoiceMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isBadRequest());
 
         List<Invoice> invoiceList = invoiceRepository.findAll();
@@ -197,12 +181,7 @@ class InvoiceResourceIT {
         // Create the Invoice, which fails.
 
         restInvoiceMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isBadRequest());
 
         List<Invoice> invoiceList = invoiceRepository.findAll();
@@ -219,12 +198,7 @@ class InvoiceResourceIT {
         // Create the Invoice, which fails.
 
         restInvoiceMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isBadRequest());
 
         List<Invoice> invoiceList = invoiceRepository.findAll();
@@ -241,12 +215,7 @@ class InvoiceResourceIT {
         // Create the Invoice, which fails.
 
         restInvoiceMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isBadRequest());
 
         List<Invoice> invoiceList = invoiceRepository.findAll();
@@ -263,12 +232,7 @@ class InvoiceResourceIT {
         // Create the Invoice, which fails.
 
         restInvoiceMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isBadRequest());
 
         List<Invoice> invoiceList = invoiceRepository.findAll();
@@ -285,12 +249,7 @@ class InvoiceResourceIT {
         // Create the Invoice, which fails.
 
         restInvoiceMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isBadRequest());
 
         List<Invoice> invoiceList = invoiceRepository.findAll();
@@ -370,7 +329,6 @@ class InvoiceResourceIT {
         restInvoiceMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedInvoice.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(updatedInvoice))
             )
@@ -399,7 +357,6 @@ class InvoiceResourceIT {
         restInvoiceMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, invoice.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(invoice))
             )
@@ -420,7 +377,6 @@ class InvoiceResourceIT {
         restInvoiceMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(invoice))
             )
@@ -439,9 +395,7 @@ class InvoiceResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restInvoiceMockMvc
-            .perform(
-                put(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Invoice in the database
@@ -466,7 +420,6 @@ class InvoiceResourceIT {
         restInvoiceMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedInvoice.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedInvoice))
             )
@@ -509,7 +462,6 @@ class InvoiceResourceIT {
         restInvoiceMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedInvoice.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedInvoice))
             )
@@ -538,7 +490,6 @@ class InvoiceResourceIT {
         restInvoiceMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, invoice.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(invoice))
             )
@@ -559,7 +510,6 @@ class InvoiceResourceIT {
         restInvoiceMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(invoice))
             )
@@ -578,12 +528,7 @@ class InvoiceResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restInvoiceMockMvc
-            .perform(
-                patch(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(invoice))
-            )
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(invoice)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Invoice in the database
@@ -601,7 +546,7 @@ class InvoiceResourceIT {
 
         // Delete the invoice
         restInvoiceMockMvc
-            .perform(delete(ENTITY_API_URL_ID, invoice.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, invoice.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

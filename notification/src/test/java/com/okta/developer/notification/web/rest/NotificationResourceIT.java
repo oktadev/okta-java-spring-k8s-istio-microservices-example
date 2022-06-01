@@ -2,7 +2,6 @@ package com.okta.developer.notification.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -104,12 +103,7 @@ class NotificationResourceIT {
         int databaseSizeBeforeCreate = notificationRepository.findAll().size();
         // Create the Notification
         restNotificationMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(notification))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(notification)))
             .andExpect(status().isCreated());
 
         // Validate the Notification in the database
@@ -133,12 +127,7 @@ class NotificationResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restNotificationMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(notification))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(notification)))
             .andExpect(status().isBadRequest());
 
         // Validate the Notification in the database
@@ -155,12 +144,7 @@ class NotificationResourceIT {
         // Create the Notification, which fails.
 
         restNotificationMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(notification))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(notification)))
             .andExpect(status().isBadRequest());
 
         List<Notification> notificationList = notificationRepository.findAll();
@@ -176,12 +160,7 @@ class NotificationResourceIT {
         // Create the Notification, which fails.
 
         restNotificationMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(notification))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(notification)))
             .andExpect(status().isBadRequest());
 
         List<Notification> notificationList = notificationRepository.findAll();
@@ -197,12 +176,7 @@ class NotificationResourceIT {
         // Create the Notification, which fails.
 
         restNotificationMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(notification))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(notification)))
             .andExpect(status().isBadRequest());
 
         List<Notification> notificationList = notificationRepository.findAll();
@@ -218,12 +192,7 @@ class NotificationResourceIT {
         // Create the Notification, which fails.
 
         restNotificationMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(notification))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(notification)))
             .andExpect(status().isBadRequest());
 
         List<Notification> notificationList = notificationRepository.findAll();
@@ -239,12 +208,7 @@ class NotificationResourceIT {
         // Create the Notification, which fails.
 
         restNotificationMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(notification))
-            )
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(notification)))
             .andExpect(status().isBadRequest());
 
         List<Notification> notificationList = notificationRepository.findAll();
@@ -315,7 +279,6 @@ class NotificationResourceIT {
         restNotificationMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedNotification.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(updatedNotification))
             )
@@ -342,7 +305,6 @@ class NotificationResourceIT {
         restNotificationMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, notification.getId())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(notification))
             )
@@ -362,7 +324,6 @@ class NotificationResourceIT {
         restNotificationMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
-                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(notification))
             )
@@ -380,12 +341,7 @@ class NotificationResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restNotificationMockMvc
-            .perform(
-                put(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(notification))
-            )
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(notification)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Notification in the database
@@ -409,7 +365,6 @@ class NotificationResourceIT {
         restNotificationMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedNotification.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedNotification))
             )
@@ -449,7 +404,6 @@ class NotificationResourceIT {
         restNotificationMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedNotification.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedNotification))
             )
@@ -476,7 +430,6 @@ class NotificationResourceIT {
         restNotificationMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, notification.getId())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(notification))
             )
@@ -496,7 +449,6 @@ class NotificationResourceIT {
         restNotificationMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
-                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(notification))
             )
@@ -515,10 +467,7 @@ class NotificationResourceIT {
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restNotificationMockMvc
             .perform(
-                patch(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(notification))
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(notification))
             )
             .andExpect(status().isMethodNotAllowed());
 
@@ -536,7 +485,7 @@ class NotificationResourceIT {
 
         // Delete the notification
         restNotificationMockMvc
-            .perform(delete(ENTITY_API_URL_ID, notification.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, notification.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

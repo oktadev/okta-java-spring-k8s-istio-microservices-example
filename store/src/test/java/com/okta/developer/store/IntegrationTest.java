@@ -2,7 +2,6 @@ package com.okta.developer.store;
 
 import com.okta.developer.store.ReactiveSqlTestContainerExtension;
 import com.okta.developer.store.StoreApp;
-import com.okta.developer.store.config.TestSecurityConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest(classes = { StoreApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = StoreApp.class)
 @ExtendWith(ReactiveSqlTestContainerExtension.class)
 public @interface IntegrationTest {
     // 5s is the spring default https://github.com/spring-projects/spring-framework/blob/29185a3d28fa5e9c1b4821ffe519ef6f56b51962/spring-test/src/main/java/org/springframework/test/web/reactive/server/DefaultWebTestClient.java#L106

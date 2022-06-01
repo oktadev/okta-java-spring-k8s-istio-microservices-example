@@ -7,7 +7,7 @@ import com.okta.developer.store.domain.User;
  */
 public class UserDTO {
 
-    private String id;
+    private Long id;
 
     private String login;
 
@@ -21,11 +21,11 @@ public class UserDTO {
         this.login = user.getLogin();
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

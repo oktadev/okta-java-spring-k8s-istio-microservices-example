@@ -1,6 +1,6 @@
 {
   "applications": ["store"],
-  "changelogDate": "20220601120943",
+  "changelogDate": "20220601133018",
   "databaseType": "sql",
   "dto": "no",
   "embedded": false,

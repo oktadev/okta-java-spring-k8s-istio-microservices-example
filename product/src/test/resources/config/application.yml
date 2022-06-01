@@ -72,13 +72,6 @@ spring:
         size: 20
   thymeleaf:
     mode: HTML
-  # Allow SecurityConfiguration to initialize w/o specifying an empty issuer-uri is OK
-  security:
-    oauth2:
-      client:
-        provider:
-          oidc:
-            issuer-uri: http://DO_NOT_CALL:9080/auth/realms/jhipster
 
 server:
   port: 10344
@@ -100,9 +93,13 @@ jhipster:
       host: localhost
       port: 5000
       queue-size: 512
-  mail:
-    from: test@localhost
-    base-url: http://127.0.0.1:8080
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
+        base64-secret: MThmMWYzNTU1NmQ2YzI3Njc0ZDQzOTc2MjBjYTI2ZDExMDY4ODZhYWYxMDczOWYyMzAyZDBlNjUzYWM4NDNiZmFmZTE0YjU2ZDZhZjVhZTUwYjdhMDBlOTU4YzBlYmJkMWY4MTIxMTRlYzEzOGI4NWUyZWQyZmUwMDI3NmNlMjM=
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
