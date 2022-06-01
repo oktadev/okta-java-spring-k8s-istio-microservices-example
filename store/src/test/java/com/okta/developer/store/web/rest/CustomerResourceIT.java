@@ -3,6 +3,7 @@ package com.okta.developer.store.web.rest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.csrf;
 
 import com.okta.developer.store.IntegrationTest;
@@ -10,7 +11,8 @@ import com.okta.developer.store.domain.Customer;
 import com.okta.developer.store.domain.User;
 import com.okta.developer.store.domain.enumeration.Gender;
 import com.okta.developer.store.repository.CustomerRepository;
-import com.okta.developer.store.service.EntityManager;
+import com.okta.developer.store.repository.EntityManager;
+import com.okta.developer.store.service.CustomerService;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
@@ -23,15 +25,20 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * Integration tests for the {@link CustomerResource} REST controller.
  */
 @IntegrationTest
-@AutoConfigureWebTestClient
+@ExtendWith(MockitoExtension.class)
+@AutoConfigureWebTestClient(timeout = IntegrationTest.DEFAULT_ENTITY_TIMEOUT)
 @WithMockUser
 class CustomerResourceIT {
 
@@ -70,6 +77,12 @@ class CustomerResourceIT {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Mock
+    private CustomerRepository customerRepositoryMock;
+
+    @Mock
+    private CustomerService customerServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -404,6 +417,24 @@ class CustomerResourceIT {
             .value(hasItem(DEFAULT_CITY))
             .jsonPath("$.[*].country")
             .value(hasItem(DEFAULT_COUNTRY));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllCustomersWithEagerRelationshipsIsEnabled() {
+        when(customerServiceMock.findAllWithEagerRelationships(any())).thenReturn(Flux.empty());
+
+        webTestClient.get().uri(ENTITY_API_URL + "?eagerload=true").exchange().expectStatus().isOk();
+
+        verify(customerServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllCustomersWithEagerRelationshipsIsNotEnabled() {
+        when(customerServiceMock.findAllWithEagerRelationships(any())).thenReturn(Flux.empty());
+
+        webTestClient.get().uri(ENTITY_API_URL + "?eagerload=true").exchange().expectStatus().isOk();
+
+        verify(customerServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test

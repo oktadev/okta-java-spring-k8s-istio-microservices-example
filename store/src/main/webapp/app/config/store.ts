@@ -1,24 +1,50 @@
-import { AnyAction, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { AnyAction, configureStore, ThunkAction, Action, Store, Reducer, ReducersMapObject, combineReducers } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { loadingBarMiddleware } from 'react-redux-loading-bar';
 
-import reducer from 'app/shared/reducers';
+import sharedReducers from 'app/shared/reducers';
 import errorMiddleware from './error-middleware';
 import notificationMiddleware from './notification-middleware';
 import loggerMiddleware from './logger-middleware';
-import { loadingBarMiddleware } from 'react-redux-loading-bar';
+import translationMiddleware from './translation-middleware';
 
 const store = configureStore({
-  reducer,
+  reducer: sharedReducers,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these field paths in all actions
         ignoredActionPaths: ['payload.config', 'payload.request', 'error', 'meta.arg'],
       },
-    }).concat(errorMiddleware, notificationMiddleware, loadingBarMiddleware(), loggerMiddleware),
+    }).concat(errorMiddleware, notificationMiddleware, loadingBarMiddleware(), translationMiddleware, loggerMiddleware),
 });
 
-const getStore = () => store;
+// Allow lazy loading of reducers https://github.com/reduxjs/redux/blob/master/docs/usage/CodeSplitting.md
+interface InjectableStore<S = any, A extends Action = AnyAction> extends Store<S, A> {
+  asyncReducers: ReducersMapObject;
+  injectReducer(key: string, reducer: Reducer): void;
+}
+
+export function configureInjectableStore(storeToInject) {
+  const injectableStore = storeToInject as InjectableStore<any, any>;
+  injectableStore.asyncReducers = {};
+
+  injectableStore.injectReducer = (key, asyncReducer) => {
+    injectableStore.asyncReducers[key] = asyncReducer;
+    injectableStore.replaceReducer(
+      combineReducers({
+        ...sharedReducers,
+        ...injectableStore.asyncReducers,
+      })
+    );
+  };
+
+  return injectableStore;
+}
+
+const injectableStore = configureInjectableStore(store);
+
+const getStore = () => injectableStore;
 
 export type IRootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

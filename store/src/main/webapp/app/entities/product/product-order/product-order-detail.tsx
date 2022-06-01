@@ -4,9 +4,10 @@ import { Button, Row, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { getEntity } from './product-order.reducer';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+
+import { getEntity } from './product-order.reducer';
 
 export const ProductOrderDetail = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ export const ProductOrderDetail = (props: RouteComponentProps<{ id: string }>) =
     dispatch(getEntity(props.match.params.id));
   }, []);
 
-  const productOrderEntity = useAppSelector(state => state.productOrder.entity);
+  const productOrderEntity = useAppSelector(state => state.store.productOrder.entity);
   return (
     <Row>
       <Col md="8">

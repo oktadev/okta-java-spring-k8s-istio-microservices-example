@@ -95,7 +95,7 @@ public class OrderItemResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        OrderItem result = orderItemService.save(orderItem);
+        OrderItem result = orderItemService.update(orderItem);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, orderItem.getId().toString()))
@@ -142,12 +142,21 @@ public class OrderItemResource {
      * {@code GET  /order-items} : get all the orderItems.
      *
      * @param pageable the pagination information.
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of orderItems in body.
      */
     @GetMapping("/order-items")
-    public ResponseEntity<List<OrderItem>> getAllOrderItems(Pageable pageable) {
+    public ResponseEntity<List<OrderItem>> getAllOrderItems(
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable,
+        @RequestParam(required = false, defaultValue = "true") boolean eagerload
+    ) {
         log.debug("REST request to get a page of OrderItems");
-        Page<OrderItem> page = orderItemService.findAll(pageable);
+        Page<OrderItem> page;
+        if (eagerload) {
+            page = orderItemService.findAllWithEagerRelationships(pageable);
+        } else {
+            page = orderItemService.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

@@ -1,27 +1,51 @@
 package com.okta.developer.notification.config.dbmigrations;
 
-import com.github.cloudyrock.mongock.ChangeLog;
-import com.github.cloudyrock.mongock.ChangeSet;
-import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl.MongockTemplate;
 import com.okta.developer.notification.config.Constants;
 import com.okta.developer.notification.domain.Authority;
 import com.okta.developer.notification.domain.User;
 import com.okta.developer.notification.security.AuthoritiesConstants;
+import io.mongock.api.annotations.ChangeUnit;
+import io.mongock.api.annotations.Execution;
+import io.mongock.api.annotations.RollbackExecution;
 import java.time.Instant;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  * Creates the initial database setup.
  */
-@ChangeLog(order = "001")
+@ChangeUnit(id = "users-initialization", order = "001")
 public class InitialSetupMigration {
 
-    @ChangeSet(order = "01", author = "initiator", id = "01-addAuthorities")
-    public void addAuthorities(MongockTemplate mongoTemplate) {
+    private final MongoTemplate template;
+
+    public InitialSetupMigration(MongoTemplate template) {
+        this.template = template;
+    }
+
+    @Execution
+    public void changeSet() {
+        Authority userAuthority = createUserAuthority();
+        userAuthority = template.save(userAuthority);
+        Authority adminAuthority = createAdminAuthority();
+        adminAuthority = template.save(adminAuthority);
+    }
+
+    @RollbackExecution
+    public void rollback() {}
+
+    private Authority createAuthority(String authority) {
         Authority adminAuthority = new Authority();
-        adminAuthority.setName(AuthoritiesConstants.ADMIN);
-        Authority userAuthority = new Authority();
-        userAuthority.setName(AuthoritiesConstants.USER);
-        mongoTemplate.save(adminAuthority);
-        mongoTemplate.save(userAuthority);
+        adminAuthority.setName(authority);
+        return adminAuthority;
+    }
+
+    private Authority createAdminAuthority() {
+        Authority adminAuthority = createAuthority(AuthoritiesConstants.ADMIN);
+        return adminAuthority;
+    }
+
+    private Authority createUserAuthority() {
+        Authority userAuthority = createAuthority(AuthoritiesConstants.USER);
+        return userAuthority;
     }
 }

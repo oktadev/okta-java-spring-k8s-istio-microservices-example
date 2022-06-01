@@ -16,8 +16,8 @@ export const ShipmentDeleteDialog = (props: RouteComponentProps<{ id: string }>)
     setLoadModal(true);
   }, []);
 
-  const shipmentEntity = useAppSelector(state => state.shipment.entity);
-  const updateSuccess = useAppSelector(state => state.shipment.updateSuccess);
+  const shipmentEntity = useAppSelector(state => state.store.shipment.entity);
+  const updateSuccess = useAppSelector(state => state.store.shipment.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/shipment' + props.location.search);

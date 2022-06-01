@@ -16,8 +16,8 @@ export const ProductOrderDeleteDialog = (props: RouteComponentProps<{ id: string
     setLoadModal(true);
   }, []);
 
-  const productOrderEntity = useAppSelector(state => state.productOrder.entity);
-  const updateSuccess = useAppSelector(state => state.productOrder.updateSuccess);
+  const productOrderEntity = useAppSelector(state => state.store.productOrder.entity);
+  const updateSuccess = useAppSelector(state => state.store.productOrder.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/product-order' + props.location.search);

@@ -1,65 +1,65 @@
 {
   "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "gateway",
+    "applications": {
+      "invoice": {
+        "applicationIndex": 2,
+        "serverPort": "8082"
+      },
+      "notification": {
+        "applicationIndex": 3,
+        "serverPort": "8083"
+      },
+      "product": {
+        "applicationIndex": 1,
+        "serverPort": "8081"
+      }
+    },
     "authenticationType": "oauth2",
-    "clientFramework": "react",
-    "serverPort": "8080",
-    "serviceDiscoveryType": false,
-    "skipUserManagement": true,
-    "withAdminUi": true,
     "baseName": "store",
+    "blueprints": [],
     "buildTool": "gradle",
+    "cacheProvider": "no",
+    "clientFramework": "react",
+    "clientPackageManager": "npm",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1654085323343,
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
-    "cacheProvider": "no",
+    "devServerPort": 9060,
+    "dtoSuffix": "DTO",
+    "enableGradleEnterprise": false,
     "enableHibernateCache": false,
     "enableSwaggerCodegen": false,
     "enableTranslation": true,
+    "entities": ["Customer", "Product", "ProductCategory", "ProductOrder", "OrderItem", "Invoice", "Shipment", "Notification"],
+    "entitySuffix": "",
+    "gradleEnterpriseHost": "",
     "jhiPrefix": "jhi",
+    "jhipsterVersion": "7.8.1",
+    "jwtSecretKey": "NjU5ZTc0OTZiMWY1MjExOTY2Nzk4YjYwYzM5MGIyN2YwNDBlYjZhYjU3ZDdhNTRkMjg0ZmY2NzNlNWM1OWExMDlhYWJlNmI1ZDQ0ZDVlZDVjODBmYWU5MTdlNmEzMDdlMGIwYmNiM2E5ZTJjM2FiY2NmYTg2ZGNkYWUzZDhiOWU=",
     "languages": ["en"],
+    "lastLiquibaseTimestamp": 1654085803000,
     "messageBroker": false,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "otherModules": [],
+    "packageFolder": "com/okta/developer/store",
+    "packageName": "com.okta.developer.store",
+    "pages": [],
     "prodDatabaseType": "postgresql",
+    "reactive": true,
     "searchEngine": false,
+    "serverPort": "8080",
+    "serviceDiscoveryType": false,
+    "skipCheckLengthOfIdentifier": false,
+    "skipCommitHook": true,
+    "skipFakeData": false,
+    "skipUserManagement": true,
     "testFrameworks": [],
     "websocket": false,
-    "enableGradleEnterprise": false,
-    "gradleEnterpriseHost": "",
-    "applicationType": "gateway",
-    "packageName": "com.okta.developer.store",
-    "packageFolder": "com/okta/developer/store",
-    "jhipsterVersion": "7.4.0",
-    "clientPackageManager": "npm",
-    "dtoSuffix": "DTO",
-    "entitySuffix": "",
-    "reactive": true,
-    "clientTheme": "none",
-    "clientThemeVariant": "",
-    "applicationIndex": 0,
-    "applications": {
-      "product": {
-        "serverPort": "8081",
-        "applicationIndex": 1
-      },
-      "invoice": {
-        "serverPort": "8082",
-        "applicationIndex": 2
-      },
-      "notification": {
-        "serverPort": "8083",
-        "applicationIndex": 3
-      }
-    },
-    "skipCheckLengthOfIdentifier": false,
-    "skipFakeData": false,
-    "blueprints": [],
-    "otherModules": [],
-    "pages": [],
-    "nativeLanguage": "en",
-    "creationTimestamp": 1639668309406,
-    "monorepository": true,
-    "skipCommitHook": true,
-    "jwtSecretKey": "ZTQ3NmE2MTFjOTEzZjNlNTc0NDAyNzNjZjMyYjY1YmVkY2ZlYjViZjAxZjdiMjI5MjFjZWUxM2M5YjMxM2NhMWI3NWI0ZDg0ODY1NGZmMWZmOGNmYzk1MDQ5N2ZkNWFiN2IzYTIzZTc4NGMyNTA2YzQxZmM1YmMwZTQ3NjBkYmE=",
-    "devServerPort": 9060,
-    "entities": ["Customer", "Product", "ProductCategory", "ProductOrder", "OrderItem", "Invoice", "Shipment", "Notification"],
-    "lastLiquibaseTimestamp": 1639668789000
+    "withAdminUi": true
   }
 }

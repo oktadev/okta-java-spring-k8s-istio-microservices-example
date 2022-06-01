@@ -95,7 +95,7 @@ public class ProductOrderResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        ProductOrder result = productOrderService.save(productOrder);
+        ProductOrder result = productOrderService.update(productOrder);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, productOrder.getId().toString()))
@@ -145,7 +145,7 @@ public class ProductOrderResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of productOrders in body.
      */
     @GetMapping("/product-orders")
-    public ResponseEntity<List<ProductOrder>> getAllProductOrders(Pageable pageable) {
+    public ResponseEntity<List<ProductOrder>> getAllProductOrders(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of ProductOrders");
         Page<ProductOrder> page = productOrderService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

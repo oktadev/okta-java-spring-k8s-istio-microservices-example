@@ -1,5 +1,11 @@
 {
-  "name": "ProductCategory",
+  "applications": ["store", "product"],
+  "changelogDate": "20220601121143",
+  "clientRootFolder": "product",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "product_category",
   "fields": [
     {
       "fieldName": "name",
@@ -11,25 +17,19 @@
       "fieldType": "String"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "product",
+  "name": "ProductCategory",
+  "pagination": "no",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "one-to-many",
       "otherEntityName": "product",
       "otherEntityRelationshipName": "productCategory",
-      "relationshipName": "product"
+      "relationshipName": "product",
+      "relationshipType": "one-to-many"
     }
   ],
-  "entityTableName": "product_category",
-  "dto": "no",
-  "pagination": "no",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["store", "product"],
-  "microserviceName": "product",
-  "clientRootFolder": "product",
-  "databaseType": "sql",
-  "changelogDate": "20211216152809"
+  "service": "serviceClass"
 }

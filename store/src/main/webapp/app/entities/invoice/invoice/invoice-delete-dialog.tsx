@@ -16,8 +16,8 @@ export const InvoiceDeleteDialog = (props: RouteComponentProps<{ id: string }>) 
     setLoadModal(true);
   }, []);
 
-  const invoiceEntity = useAppSelector(state => state.invoice.entity);
-  const updateSuccess = useAppSelector(state => state.invoice.updateSuccess);
+  const invoiceEntity = useAppSelector(state => state.store.invoice.entity);
+  const updateSuccess = useAppSelector(state => state.store.invoice.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/invoice' + props.location.search);

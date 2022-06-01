@@ -4,12 +4,13 @@ import { Button, Table } from 'reactstrap';
 import { Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { getEntities } from './product-order.reducer';
-import { IProductOrder } from 'app/shared/model/product/product-order.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+
+import { IProductOrder } from 'app/shared/model/product/product-order.model';
+import { getEntities } from './product-order.reducer';
 
 export const ProductOrder = (props: RouteComponentProps<{ url: string }>) => {
   const dispatch = useAppDispatch();
@@ -18,9 +19,9 @@ export const ProductOrder = (props: RouteComponentProps<{ url: string }>) => {
     overridePaginationStateWithQueryParams(getSortState(props.location, ITEMS_PER_PAGE, 'id'), props.location.search)
   );
 
-  const productOrderList = useAppSelector(state => state.productOrder.entities);
-  const loading = useAppSelector(state => state.productOrder.loading);
-  const totalItems = useAppSelector(state => state.productOrder.totalItems);
+  const productOrderList = useAppSelector(state => state.store.productOrder.entities);
+  const loading = useAppSelector(state => state.store.productOrder.loading);
+  const totalItems = useAppSelector(state => state.store.productOrder.totalItems);
 
   const getAllEntities = () => {
     dispatch(
@@ -88,7 +89,7 @@ export const ProductOrder = (props: RouteComponentProps<{ url: string }>) => {
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
             <Translate contentKey="storeApp.productProductOrder.home.refreshListLabel">Refresh List</Translate>
           </Button>
-          <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+          <Link to="/product-order/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
             <Translate contentKey="storeApp.productProductOrder.home.createLabel">Create new Product Order</Translate>
@@ -125,7 +126,7 @@ export const ProductOrder = (props: RouteComponentProps<{ url: string }>) => {
               {productOrderList.map((productOrder, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
                   <td>
-                    <Button tag={Link} to={`${match.url}/${productOrder.id}`} color="link" size="sm">
+                    <Button tag={Link} to={`/product-order/${productOrder.id}`} color="link" size="sm">
                       {productOrder.id}
                     </Button>
                   </td>
@@ -140,7 +141,7 @@ export const ProductOrder = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{productOrder.customer}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${productOrder.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                      <Button tag={Link} to={`/product-order/${productOrder.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
@@ -148,7 +149,7 @@ export const ProductOrder = (props: RouteComponentProps<{ url: string }>) => {
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${productOrder.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`/product-order/${productOrder.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="primary"
                         size="sm"
                         data-cy="entityEditButton"
@@ -160,7 +161,7 @@ export const ProductOrder = (props: RouteComponentProps<{ url: string }>) => {
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${productOrder.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`/product-order/${productOrder.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="danger"
                         size="sm"
                         data-cy="entityDeleteButton"

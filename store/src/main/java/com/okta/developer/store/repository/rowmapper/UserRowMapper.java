@@ -1,7 +1,6 @@
 package com.okta.developer.store.repository.rowmapper;
 
 import com.okta.developer.store.domain.User;
-import com.okta.developer.store.service.ColumnConverter;
 import io.r2dbc.spi.Row;
 import java.time.Instant;
 import java.util.function.BiFunction;

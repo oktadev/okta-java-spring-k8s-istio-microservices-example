@@ -1,5 +1,10 @@
 {
-  "name": "Customer",
+  "applications": ["store"],
+  "changelogDate": "20220601120943",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "customer",
   "fields": [
     {
       "fieldName": "firstName",
@@ -14,8 +19,8 @@
     {
       "fieldName": "gender",
       "fieldType": "Gender",
-      "fieldValues": "MALE,FEMALE,OTHER",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MALE,FEMALE,OTHER"
     },
     {
       "fieldName": "email",
@@ -48,27 +53,22 @@
       "fieldValidateRules": ["required"]
     }
   ],
+  "fluentMethods": true,
+  "javadoc": "Entities for Store Gateway",
+  "jpaMetamodelFiltering": false,
+  "name": "Customer",
+  "pagination": "pagination",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "one-to-one",
+      "otherEntityField": "login",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "customer",
-      "relationshipValidateRules": "required",
+      "ownerSide": true,
       "relationshipName": "user",
-      "otherEntityField": "login",
-      "ownerSide": true
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
-  "javadoc": "Entities for Store Gateway",
-  "entityTableName": "customer",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["store"],
-  "databaseType": "sql",
-  "changelogDate": "20211216152609"
+  "service": "serviceClass"
 }

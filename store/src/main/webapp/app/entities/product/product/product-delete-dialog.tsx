@@ -16,8 +16,8 @@ export const ProductDeleteDialog = (props: RouteComponentProps<{ id: string }>) 
     setLoadModal(true);
   }, []);
 
-  const productEntity = useAppSelector(state => state.product.entity);
-  const updateSuccess = useAppSelector(state => state.product.updateSuccess);
+  const productEntity = useAppSelector(state => state.store.product.entity);
+  const updateSuccess = useAppSelector(state => state.store.product.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/product' + props.location.search);

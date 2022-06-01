@@ -12,13 +12,13 @@ services:
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/auth/realms/jhipster
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=web_app
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=web_app
-      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - JHIPSTER_SLEEP=60 # gives time for microservices to boot before the gateway, the entire stack will be ready to accept incomming requests.
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
       - 127.0.0.1:8080:8080
   store-postgresql:
-    image: postgres:13.5
+    image: postgres:14.2
     # volumes:
     #   - ~/volumes/jhipster/store/postgresql/:/var/lib/postgresql/data/
     environment:
@@ -30,7 +30,7 @@ services:
     ports:
       - 127.0.0.1:5432:5432
   keycloak:
-    image: jboss/keycloak:15.0.2
+    image: jboss/keycloak:16.1.0
     command:
       [
         '-b',

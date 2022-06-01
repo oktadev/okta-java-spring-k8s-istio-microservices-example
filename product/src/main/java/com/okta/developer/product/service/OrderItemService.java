@@ -37,6 +37,17 @@ public class OrderItemService {
     }
 
     /**
+     * Update a orderItem.
+     *
+     * @param orderItem the entity to save.
+     * @return the persisted entity.
+     */
+    public OrderItem update(OrderItem orderItem) {
+        log.debug("Request to save OrderItem : {}", orderItem);
+        return orderItemRepository.save(orderItem);
+    }
+
+    /**
      * Partially update a orderItem.
      *
      * @param orderItem the entity to update partially.
@@ -76,6 +87,15 @@ public class OrderItemService {
     }
 
     /**
+     * Get all the orderItems with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<OrderItem> findAllWithEagerRelationships(Pageable pageable) {
+        return orderItemRepository.findAllWithEagerRelationships(pageable);
+    }
+
+    /**
      * Get one orderItem by id.
      *
      * @param id the id of the entity.
@@ -84,7 +104,7 @@ public class OrderItemService {
     @Transactional(readOnly = true)
     public Optional<OrderItem> findOne(Long id) {
         log.debug("Request to get OrderItem : {}", id);
-        return orderItemRepository.findById(id);
+        return orderItemRepository.findOneWithEagerRelationships(id);
     }
 
     /**

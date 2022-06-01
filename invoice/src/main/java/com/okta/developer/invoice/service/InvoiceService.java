@@ -37,6 +37,17 @@ public class InvoiceService {
     }
 
     /**
+     * Update a invoice.
+     *
+     * @param invoice the entity to save.
+     * @return the persisted entity.
+     */
+    public Invoice update(Invoice invoice) {
+        log.debug("Request to save Invoice : {}", invoice);
+        return invoiceRepository.save(invoice);
+    }
+
+    /**
      * Partially update a invoice.
      *
      * @param invoice the entity to update partially.

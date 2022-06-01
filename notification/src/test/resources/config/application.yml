@@ -14,7 +14,7 @@
 # ===================================================================
 
 mongock:
-  change-logs-scan-package:
+  migration-scan-package:
     - com.okta.developer.notification.config.dbmigrations
   mongo-db:
     read-concern: local
@@ -24,18 +24,18 @@ mongock:
 spring:
   application:
     name: notification
+
   jackson:
     serialization:
       write-durations-as-timestamps: false
   data:
-    mongodb:
-      host: localhost
-      port: 0
-      database: notification
   mail:
     host: localhost
   main:
     allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   messages:
     basename: i18n/messages
   task:
@@ -48,7 +48,7 @@ spring:
     scheduling:
       thread-name-prefix: notification-scheduling-
       pool:
-        size: 1
+        size: 20
   thymeleaf:
     mode: HTML
   # Allow SecurityConfiguration to initialize w/o specifying an empty issuer-uri is OK
@@ -68,7 +68,6 @@ server:
 #
 # Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
-
 jhipster:
   clientApp:
     name: 'notificationApp'

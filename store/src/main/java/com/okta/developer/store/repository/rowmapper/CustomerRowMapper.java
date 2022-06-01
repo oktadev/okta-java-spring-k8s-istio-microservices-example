@@ -2,7 +2,6 @@ package com.okta.developer.store.repository.rowmapper;
 
 import com.okta.developer.store.domain.Customer;
 import com.okta.developer.store.domain.enumeration.Gender;
-import com.okta.developer.store.service.ColumnConverter;
 import io.r2dbc.spi.Row;
 import java.util.function.BiFunction;
 import org.springframework.stereotype.Service;

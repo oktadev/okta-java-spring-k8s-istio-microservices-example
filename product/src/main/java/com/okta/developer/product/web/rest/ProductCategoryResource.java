@@ -90,7 +90,7 @@ public class ProductCategoryResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        ProductCategory result = productCategoryService.save(productCategory);
+        ProductCategory result = productCategoryService.update(productCategory);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, productCategory.getId().toString()))

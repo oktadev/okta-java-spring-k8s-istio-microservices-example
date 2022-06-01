@@ -1,5 +1,11 @@
 {
-  "name": "Shipment",
+  "applications": ["store", "invoice"],
+  "changelogDate": "20220601121043",
+  "clientRootFolder": "invoice",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "shipment",
   "fields": [
     {
       "fieldName": "trackingCode",
@@ -15,27 +21,21 @@
       "fieldType": "String"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "invoice",
+  "name": "Shipment",
+  "pagination": "pagination",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "many-to-one",
+      "otherEntityField": "code",
       "otherEntityName": "invoice",
       "otherEntityRelationshipName": "shipment",
-      "relationshipValidateRules": "required",
       "relationshipName": "invoice",
-      "otherEntityField": "code"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
-  "entityTableName": "shipment",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["store", "invoice"],
-  "microserviceName": "invoice",
-  "clientRootFolder": "invoice",
-  "databaseType": "sql",
-  "changelogDate": "20211216152709"
+  "service": "serviceClass"
 }

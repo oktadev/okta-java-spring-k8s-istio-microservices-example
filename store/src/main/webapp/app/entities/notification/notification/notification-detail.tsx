@@ -4,9 +4,10 @@ import { Button, Row, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { getEntity } from './notification.reducer';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+
+import { getEntity } from './notification.reducer';
 
 export const NotificationDetail = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ export const NotificationDetail = (props: RouteComponentProps<{ id: string }>) =
     dispatch(getEntity(props.match.params.id));
   }, []);
 
-  const notificationEntity = useAppSelector(state => state.notification.entity);
+  const notificationEntity = useAppSelector(state => state.store.notification.entity);
   return (
     <Row>
       <Col md="8">

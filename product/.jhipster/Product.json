@@ -1,5 +1,11 @@
 {
-  "name": "Product",
+  "applications": ["store", "product"],
+  "changelogDate": "20220601120943",
+  "clientRootFolder": "product",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "product",
   "fields": [
     {
       "fieldName": "name",
@@ -19,8 +25,8 @@
     {
       "fieldName": "itemSize",
       "fieldType": "Size",
-      "fieldValues": "S,M,L,XL,XXL",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": ["required"],
+      "fieldValues": "S,M,L,XL,XXL"
     },
     {
       "fieldName": "image",
@@ -28,27 +34,21 @@
       "fieldTypeBlobContent": "image"
     }
   ],
+  "fluentMethods": true,
+  "javadoc": "Entities for product microservice",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "product",
+  "name": "Product",
+  "pagination": "pagination",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
       "otherEntityName": "productCategory",
       "otherEntityRelationshipName": "product",
       "relationshipName": "productCategory",
-      "otherEntityField": "name"
+      "relationshipType": "many-to-one"
     }
   ],
-  "javadoc": "Entities for product microservice",
-  "entityTableName": "product",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["store", "product"],
-  "microserviceName": "product",
-  "clientRootFolder": "product",
-  "databaseType": "sql",
-  "changelogDate": "20211216152609"
+  "service": "serviceClass"
 }

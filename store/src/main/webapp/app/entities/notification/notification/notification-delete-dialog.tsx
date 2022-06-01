@@ -16,8 +16,8 @@ export const NotificationDeleteDialog = (props: RouteComponentProps<{ id: string
     setLoadModal(true);
   }, []);
 
-  const notificationEntity = useAppSelector(state => state.notification.entity);
-  const updateSuccess = useAppSelector(state => state.notification.updateSuccess);
+  const notificationEntity = useAppSelector(state => state.store.notification.entity);
+  const updateSuccess = useAppSelector(state => state.store.notification.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/notification');

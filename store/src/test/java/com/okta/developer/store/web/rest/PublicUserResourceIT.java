@@ -7,9 +7,9 @@ import com.okta.developer.store.IntegrationTest;
 import com.okta.developer.store.config.Constants;
 import com.okta.developer.store.config.TestSecurityConfiguration;
 import com.okta.developer.store.domain.User;
+import com.okta.developer.store.repository.EntityManager;
 import com.okta.developer.store.repository.UserRepository;
 import com.okta.developer.store.security.AuthoritiesConstants;
-import com.okta.developer.store.service.EntityManager;
 import com.okta.developer.store.service.dto.UserDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 /**
  * Integration tests for the {@link UserResource} REST controller.
  */
-@AutoConfigureWebTestClient
+@AutoConfigureWebTestClient(timeout = IntegrationTest.DEFAULT_TIMEOUT)
 @WithMockUser(authorities = AuthoritiesConstants.ADMIN)
 @IntegrationTest
 class PublicUserResourceIT {
@@ -58,7 +58,7 @@ class PublicUserResourceIT {
         // Get all the users
         UserDTO foundUser = webTestClient
             .get()
-            .uri("/api/users?sort=id,DESC")
+            .uri("/api/users?sort=id,desc")
             .accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus()

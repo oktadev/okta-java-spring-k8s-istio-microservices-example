@@ -37,6 +37,17 @@ public class ProductService {
     }
 
     /**
+     * Update a product.
+     *
+     * @param product the entity to save.
+     * @return the persisted entity.
+     */
+    public Product update(Product product) {
+        log.debug("Request to save Product : {}", product);
+        return productRepository.save(product);
+    }
+
+    /**
      * Partially update a product.
      *
      * @param product the entity to update partially.
@@ -85,6 +96,15 @@ public class ProductService {
     }
 
     /**
+     * Get all the products with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<Product> findAllWithEagerRelationships(Pageable pageable) {
+        return productRepository.findAllWithEagerRelationships(pageable);
+    }
+
+    /**
      * Get one product by id.
      *
      * @param id the id of the entity.
@@ -93,7 +113,7 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Optional<Product> findOne(Long id) {
         log.debug("Request to get Product : {}", id);
-        return productRepository.findById(id);
+        return productRepository.findOneWithEagerRelationships(id);
     }
 
     /**

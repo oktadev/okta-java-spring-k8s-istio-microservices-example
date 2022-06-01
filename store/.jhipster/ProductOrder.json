@@ -1,5 +1,11 @@
 {
-  "name": "ProductOrder",
+  "applications": ["store", "product"],
+  "changelogDate": "20220601121243",
+  "clientRootFolder": "product",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "product_order",
   "fields": [
     {
       "fieldName": "placedDate",
@@ -9,8 +15,8 @@
     {
       "fieldName": "status",
       "fieldType": "OrderStatus",
-      "fieldValues": "COMPLETED,PENDING,CANCELLED",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": ["required"],
+      "fieldValues": "COMPLETED,PENDING,CANCELLED"
     },
     {
       "fieldName": "code",
@@ -27,25 +33,19 @@
       "fieldValidateRules": ["required"]
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "product",
+  "name": "ProductOrder",
+  "pagination": "pagination",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "one-to-many",
       "otherEntityName": "orderItem",
       "otherEntityRelationshipName": "order",
-      "relationshipName": "orderItem"
+      "relationshipName": "orderItem",
+      "relationshipType": "one-to-many"
     }
   ],
-  "entityTableName": "product_order",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["store", "product"],
-  "microserviceName": "product",
-  "clientRootFolder": "product",
-  "databaseType": "sql",
-  "changelogDate": "20211216152909"
+  "service": "serviceClass"
 }

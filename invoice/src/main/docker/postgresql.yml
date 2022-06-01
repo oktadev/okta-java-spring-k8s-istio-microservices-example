@@ -2,7 +2,7 @@
 version: '3.8'
 services:
   invoice-postgresql:
-    image: postgres:13.5
+    image: postgres:14.2
     # volumes:
     #   - ~/volumes/jhipster/invoice/postgresql/:/var/lib/postgresql/data/
     environment:

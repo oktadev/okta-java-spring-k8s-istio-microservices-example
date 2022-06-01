@@ -1,7 +1,7 @@
 package com.okta.developer.notification.domain;
 
 import com.okta.developer.notification.domain.enumeration.NotificationType;
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.validation.constraints.*;
@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 /**
  * Entities for notification microservice
  */
-@ApiModel(description = "Entities for notification microservice")
+@Schema(description = "Entities for notification microservice")
 @Document(collection = "notification")
 public class Notification implements Serializable {
 

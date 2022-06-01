@@ -1,7 +1,7 @@
 package com.okta.developer.store.domain;
 
 import com.okta.developer.store.domain.enumeration.Gender;
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import javax.validation.constraints.*;
 import org.springframework.data.annotation.Id;
@@ -12,7 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 /**
  * Entities for Store Gateway
  */
-@ApiModel(description = "Entities for Store Gateway")
+@Schema(description = "Entities for Store Gateway")
 @Table("customer")
 public class Customer implements Serializable {
 

@@ -14,6 +14,16 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+---
+# Conditionally disable springdoc on missing api-docs profile
+spring:
+  config:
+    activate:
+      on-profile: '!api-docs'
+springdoc:
+  api-docs:
+    enabled: false
+---
 feign:
   circuitbreaker:
     enabled: true
@@ -28,24 +38,39 @@ management:
       base-path: /management
       exposure:
         include:
-          ['configprops', 'env', 'health', 'info', 'jhimetrics', 'logfile', 'loggers', 'prometheus', 'threaddump', 'caches', 'liquibase']
+          [
+            'configprops',
+            'env',
+            'health',
+            'info',
+            'jhimetrics',
+            'jhiopenapigroups',
+            'logfile',
+            'loggers',
+            'prometheus',
+            'threaddump',
+            'caches',
+            'liquibase',
+          ]
   endpoint:
     health:
       show-details: when_authorized
       roles: 'ROLE_ADMIN'
       probes:
         enabled: true
+      group:
+        liveness:
+          include: livenessState
+        readiness:
+          include: readinessState,db
     jhimetrics:
       enabled: true
   info:
     git:
       mode: full
+    env:
+      enabled: true
   health:
-    group:
-      liveness:
-        include: livenessState
-      readiness:
-        include: readinessState,db
     mail:
       enabled: false # When using the MailService, configure an SMTP server and set this to true
   metrics:
@@ -117,6 +142,9 @@ spring:
     basename: i18n/messages
   main:
     allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   task:
     execution:
       thread-name-prefix: invoice-task-
@@ -143,13 +171,16 @@ spring:
           oidc:
             client-id: internal
             client-secret: internal
-            scope: openid,profile,email
+            scope: openid, profile, email, offline_access # last one for refresh tokens
 
 server:
   servlet:
     session:
       cookie:
         http-only: true
+
+springdoc:
+  show-actuator: true
 
 # Properties to be exposed on the /info management endpoint
 info:
@@ -176,8 +207,8 @@ jhipster:
   mail:
     from: invoice@localhost
   api-docs:
-    default-include-pattern: ${server.servlet.context-path:}/api/.*
-    management-include-pattern: ${server.servlet.context-path:}/management/.*
+    default-include-pattern: ${server.servlet.context-path:}/api/**
+    management-include-pattern: ${server.servlet.context-path:}/management/**
     title: Invoice API
     description: Invoice API documentation
     version: 0.0.1
@@ -188,7 +219,7 @@ jhipster:
     license: unlicensed
     license-url:
   security:
-    content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:"
+    content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com data:"
     oauth2:
       audience:
         - account

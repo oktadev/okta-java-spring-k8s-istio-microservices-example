@@ -3,7 +3,7 @@ package com.okta.developer.invoice.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.okta.developer.invoice.domain.enumeration.InvoiceStatus;
 import com.okta.developer.invoice.domain.enumeration.PaymentMethod;
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -17,7 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * Entities for Invoice microservice
  */
-@ApiModel(description = "Entities for Invoice microservice")
+@Schema(description = "Entities for Invoice microservice")
 @Entity
 @Table(name = "invoice")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

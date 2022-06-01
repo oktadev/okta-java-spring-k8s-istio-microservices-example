@@ -1,7 +1,7 @@
 apply plugin: "war"
 
 bootWar {
-    mainClassName = "com.okta.developer.invoice.InvoiceApp"
+    mainClass = "com.okta.developer.invoice.InvoiceApp"
     includes = ["WEB-INF/**", "META-INF/**"]
 }
 

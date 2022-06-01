@@ -16,8 +16,8 @@ export const CustomerDeleteDialog = (props: RouteComponentProps<{ id: string }>)
     setLoadModal(true);
   }, []);
 
-  const customerEntity = useAppSelector(state => state.customer.entity);
-  const updateSuccess = useAppSelector(state => state.customer.updateSuccess);
+  const customerEntity = useAppSelector(state => state.store.customer.entity);
+  const updateSuccess = useAppSelector(state => state.store.customer.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/customer' + props.location.search);

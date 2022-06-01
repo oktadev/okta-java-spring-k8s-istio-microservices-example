@@ -1,5 +1,11 @@
 {
-  "name": "Notification",
+  "applications": ["store", "notification"],
+  "changelogDate": "20220601121643",
+  "clientRootFolder": "notification",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "notification",
   "fields": [
     {
       "fieldName": "date",
@@ -18,8 +24,8 @@
     {
       "fieldName": "format",
       "fieldType": "NotificationType",
-      "fieldValues": "EMAIL,SMS,PARCEL",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EMAIL,SMS,PARCEL"
     },
     {
       "fieldName": "userId",
@@ -32,19 +38,13 @@
       "fieldValidateRules": ["required"]
     }
   ],
-  "relationships": [],
-  "javadoc": "Entities for notification microservice",
-  "entityTableName": "notification",
-  "dto": "no",
-  "pagination": "no",
-  "service": "no",
-  "jpaMetamodelFiltering": false,
   "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["store", "notification"],
+  "javadoc": "Entities for notification microservice",
+  "jpaMetamodelFiltering": false,
   "microserviceName": "notification",
-  "clientRootFolder": "notification",
-  "databaseType": "sql",
-  "changelogDate": "20211216153309"
+  "name": "Notification",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
 }

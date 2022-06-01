@@ -11,16 +11,16 @@ if (project.hasProperty("api-docs")) {
     profiles += ",api-docs"
 }
 
+if (project.hasProperty("e2e")) {
+    profiles += ",e2e"
+}
+
 springBoot {
     buildInfo()
 }
 
 bootRun {
     args = []
-}
-
-task webapp_test(type: NpmTask, dependsOn: "npm_install") {
-    args = ["run", "webapp:test"]
 }
 
 task webapp(type: NpmTask, dependsOn: "npm_install") {
@@ -41,6 +41,5 @@ processResources {
     }
 }
 
-test.dependsOn webapp_test
 processResources.dependsOn webapp
 bootJar.dependsOn processResources

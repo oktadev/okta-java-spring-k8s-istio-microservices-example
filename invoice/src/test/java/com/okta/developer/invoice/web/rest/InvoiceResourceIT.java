@@ -386,7 +386,7 @@ class InvoiceResourceIT {
         assertThat(testInvoice.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testInvoice.getPaymentMethod()).isEqualTo(UPDATED_PAYMENT_METHOD);
         assertThat(testInvoice.getPaymentDate()).isEqualTo(UPDATED_PAYMENT_DATE);
-        assertThat(testInvoice.getPaymentAmount()).isEqualTo(UPDATED_PAYMENT_AMOUNT);
+        assertThat(testInvoice.getPaymentAmount()).isEqualByComparingTo(UPDATED_PAYMENT_AMOUNT);
     }
 
     @Test

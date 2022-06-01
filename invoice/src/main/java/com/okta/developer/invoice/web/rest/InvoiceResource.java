@@ -95,7 +95,7 @@ public class InvoiceResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Invoice result = invoiceService.save(invoice);
+        Invoice result = invoiceService.update(invoice);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, invoice.getId().toString()))
@@ -145,7 +145,7 @@ public class InvoiceResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of invoices in body.
      */
     @GetMapping("/invoices")
-    public ResponseEntity<List<Invoice>> getAllInvoices(Pageable pageable) {
+    public ResponseEntity<List<Invoice>> getAllInvoices(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Invoices");
         Page<Invoice> page = invoiceService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

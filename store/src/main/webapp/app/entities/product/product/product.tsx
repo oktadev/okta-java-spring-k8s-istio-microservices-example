@@ -4,12 +4,13 @@ import { Button, Table } from 'reactstrap';
 import { openFile, byteSize, Translate, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { getEntities } from './product.reducer';
-import { IProduct } from 'app/shared/model/product/product.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+
+import { IProduct } from 'app/shared/model/product/product.model';
+import { getEntities } from './product.reducer';
 
 export const Product = (props: RouteComponentProps<{ url: string }>) => {
   const dispatch = useAppDispatch();
@@ -18,9 +19,9 @@ export const Product = (props: RouteComponentProps<{ url: string }>) => {
     overridePaginationStateWithQueryParams(getSortState(props.location, ITEMS_PER_PAGE, 'id'), props.location.search)
   );
 
-  const productList = useAppSelector(state => state.product.entities);
-  const loading = useAppSelector(state => state.product.loading);
-  const totalItems = useAppSelector(state => state.product.totalItems);
+  const productList = useAppSelector(state => state.store.product.entities);
+  const loading = useAppSelector(state => state.store.product.loading);
+  const totalItems = useAppSelector(state => state.store.product.totalItems);
 
   const getAllEntities = () => {
     dispatch(
@@ -88,7 +89,7 @@ export const Product = (props: RouteComponentProps<{ url: string }>) => {
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
             <Translate contentKey="storeApp.productProduct.home.refreshListLabel">Refresh List</Translate>
           </Button>
-          <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+          <Link to="/product/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
             <Translate contentKey="storeApp.productProduct.home.createLabel">Create new Product</Translate>
@@ -129,7 +130,7 @@ export const Product = (props: RouteComponentProps<{ url: string }>) => {
               {productList.map((product, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
                   <td>
-                    <Button tag={Link} to={`${match.url}/${product.id}`} color="link" size="sm">
+                    <Button tag={Link} to={`/product/${product.id}`} color="link" size="sm">
                       {product.id}
                     </Button>
                   </td>
@@ -156,14 +157,14 @@ export const Product = (props: RouteComponentProps<{ url: string }>) => {
                   </td>
                   <td>
                     {product.productCategory ? (
-                      <Link to={`product-category/${product.productCategory.id}`}>{product.productCategory.name}</Link>
+                      <Link to={`/product-category/${product.productCategory.id}`}>{product.productCategory.name}</Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${product.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                      <Button tag={Link} to={`/product/${product.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
@@ -171,7 +172,7 @@ export const Product = (props: RouteComponentProps<{ url: string }>) => {
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${product.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`/product/${product.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="primary"
                         size="sm"
                         data-cy="entityEditButton"
@@ -183,7 +184,7 @@ export const Product = (props: RouteComponentProps<{ url: string }>) => {
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${product.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`/product/${product.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="danger"
                         size="sm"
                         data-cy="entityDeleteButton"

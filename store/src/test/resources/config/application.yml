@@ -22,6 +22,7 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.cloud.gateway.config.GatewayMetricsAutoConfiguration
+
   jackson:
     serialization:
       write-durations-as-timestamps: false
@@ -48,7 +49,7 @@ spring:
     scheduling:
       thread-name-prefix: store-scheduling-
       pool:
-        size: 1
+        size: 20
   thymeleaf:
     mode: HTML
   # Allow SecurityConfiguration to initialize w/o specifying an empty issuer-uri is OK
@@ -68,7 +69,6 @@ server:
 #
 # Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
-
 jhipster:
   clientApp:
     name: 'storeApp'

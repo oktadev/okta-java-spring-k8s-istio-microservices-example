@@ -37,6 +37,17 @@ public class ProductOrderService {
     }
 
     /**
+     * Update a productOrder.
+     *
+     * @param productOrder the entity to save.
+     * @return the persisted entity.
+     */
+    public ProductOrder update(ProductOrder productOrder) {
+        log.debug("Request to save ProductOrder : {}", productOrder);
+        return productOrderRepository.save(productOrder);
+    }
+
+    /**
      * Partially update a productOrder.
      *
      * @param productOrder the entity to update partially.

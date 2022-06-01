@@ -8,9 +8,9 @@ import com.okta.developer.store.config.Constants;
 import com.okta.developer.store.domain.Authority;
 import com.okta.developer.store.domain.User;
 import com.okta.developer.store.repository.AuthorityRepository;
+import com.okta.developer.store.repository.EntityManager;
 import com.okta.developer.store.repository.UserRepository;
 import com.okta.developer.store.security.AuthoritiesConstants;
-import com.okta.developer.store.service.EntityManager;
 import com.okta.developer.store.service.dto.AdminUserDTO;
 import com.okta.developer.store.service.dto.UserDTO;
 import com.okta.developer.store.service.mapper.UserMapper;
@@ -29,7 +29,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 /**
  * Integration tests for the {@link UserResource} REST controller.
  */
-@AutoConfigureWebTestClient
+@AutoConfigureWebTestClient(timeout = IntegrationTest.DEFAULT_TIMEOUT)
 @WithMockUser(authorities = AuthoritiesConstants.ADMIN)
 @IntegrationTest
 class UserResourceIT {
@@ -117,78 +117,6 @@ class UserResourceIT {
     @BeforeEach
     public void initTest() {
         user = initTestUser(userRepository, em);
-    }
-
-    @Test
-    void getAllUsers() {
-        // Initialize the database
-        userRepository.create(user).block();
-        authorityRepository
-            .findById(AuthoritiesConstants.USER)
-            .flatMap(authority -> userRepository.saveUserAuthority(user.getId(), authority.getName()))
-            .block();
-
-        // Get all the users
-        AdminUserDTO foundUser = webTestClient
-            .get()
-            .uri("/api/admin/users?sort=id,DESC")
-            .accept(MediaType.APPLICATION_JSON)
-            .exchange()
-            .expectStatus()
-            .isOk()
-            .expectHeader()
-            .contentType(MediaType.APPLICATION_JSON)
-            .returnResult(AdminUserDTO.class)
-            .getResponseBody()
-            .blockFirst();
-
-        assertThat(foundUser.getLogin()).isEqualTo(DEFAULT_LOGIN);
-        assertThat(foundUser.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
-        assertThat(foundUser.getLastName()).isEqualTo(DEFAULT_LASTNAME);
-        assertThat(foundUser.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(foundUser.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
-        assertThat(foundUser.getLangKey()).isEqualTo(DEFAULT_LANGKEY);
-        assertThat(foundUser.getAuthorities()).containsExactly(AuthoritiesConstants.USER);
-    }
-
-    @Test
-    void getUser() {
-        // Initialize the database
-        userRepository.create(user).block();
-        authorityRepository
-            .findById(AuthoritiesConstants.USER)
-            .flatMap(authority -> userRepository.saveUserAuthority(user.getId(), authority.getName()))
-            .block();
-
-        // Get the user
-        webTestClient
-            .get()
-            .uri("/api/admin/users/{login}", user.getLogin())
-            .exchange()
-            .expectStatus()
-            .isOk()
-            .expectHeader()
-            .contentType(MediaType.APPLICATION_JSON)
-            .expectBody()
-            .jsonPath("$.login")
-            .isEqualTo(user.getLogin())
-            .jsonPath("$.firstName")
-            .isEqualTo(DEFAULT_FIRSTNAME)
-            .jsonPath("$.lastName")
-            .isEqualTo(DEFAULT_LASTNAME)
-            .jsonPath("$.email")
-            .isEqualTo(DEFAULT_EMAIL)
-            .jsonPath("$.imageUrl")
-            .isEqualTo(DEFAULT_IMAGEURL)
-            .jsonPath("$.langKey")
-            .isEqualTo(DEFAULT_LANGKEY)
-            .jsonPath("$.authorities")
-            .isEqualTo(AuthoritiesConstants.USER);
-    }
-
-    @Test
-    void getNonExistingUser() {
-        webTestClient.get().uri("/api/admin/users/unknown").exchange().expectStatus().isNotFound();
     }
 
     @Test

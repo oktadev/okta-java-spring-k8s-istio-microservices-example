@@ -37,6 +37,17 @@ public class ShipmentService {
     }
 
     /**
+     * Update a shipment.
+     *
+     * @param shipment the entity to save.
+     * @return the persisted entity.
+     */
+    public Shipment update(Shipment shipment) {
+        log.debug("Request to save Shipment : {}", shipment);
+        return shipmentRepository.save(shipment);
+    }
+
+    /**
      * Partially update a shipment.
      *
      * @param shipment the entity to update partially.
@@ -76,6 +87,15 @@ public class ShipmentService {
     }
 
     /**
+     * Get all the shipments with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<Shipment> findAllWithEagerRelationships(Pageable pageable) {
+        return shipmentRepository.findAllWithEagerRelationships(pageable);
+    }
+
+    /**
      * Get one shipment by id.
      *
      * @param id the id of the entity.
@@ -84,7 +104,7 @@ public class ShipmentService {
     @Transactional(readOnly = true)
     public Optional<Shipment> findOne(Long id) {
         log.debug("Request to get Shipment : {}", id);
-        return shipmentRepository.findById(id);
+        return shipmentRepository.findOneWithEagerRelationships(id);
     }
 
     /**

@@ -2,7 +2,7 @@ package com.okta.developer.product.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.okta.developer.product.domain.enumeration.Size;
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.*;
@@ -13,7 +13,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * Entities for product microservice
  */
-@ApiModel(description = "Entities for product microservice")
+@Schema(description = "Entities for product microservice")
 @Entity
 @Table(name = "product")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

@@ -4,22 +4,23 @@ import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { getEntity, updateEntity, createEntity, reset } from './notification.reducer';
-import { INotification } from 'app/shared/model/notification/notification.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+
+import { INotification } from 'app/shared/model/notification/notification.model';
 import { NotificationType } from 'app/shared/model/enumerations/notification-type.model';
+import { getEntity, updateEntity, createEntity, reset } from './notification.reducer';
 
 export const NotificationUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const notificationEntity = useAppSelector(state => state.notification.entity);
-  const loading = useAppSelector(state => state.notification.loading);
-  const updating = useAppSelector(state => state.notification.updating);
-  const updateSuccess = useAppSelector(state => state.notification.updateSuccess);
+  const notificationEntity = useAppSelector(state => state.store.notification.entity);
+  const loading = useAppSelector(state => state.store.notification.loading);
+  const updating = useAppSelector(state => state.store.notification.updating);
+  const updateSuccess = useAppSelector(state => state.store.notification.updateSuccess);
   const notificationTypeValues = Object.keys(NotificationType);
   const handleClose = () => {
     props.history.push('/notification');

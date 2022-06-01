@@ -1,7 +1,7 @@
 apply plugin: "war"
 
 bootWar {
-    mainClassName = "com.okta.developer.notification.NotificationApp"
+    mainClass = "com.okta.developer.notification.NotificationApp"
     includes = ["WEB-INF/**", "META-INF/**"]
 }
 

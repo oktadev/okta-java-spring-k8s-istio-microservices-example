@@ -1,5 +1,11 @@
 {
-  "name": "OrderItem",
+  "applications": ["store", "product"],
+  "changelogDate": "20220601121243",
+  "clientRootFolder": "product",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "order_item",
   "fields": [
     {
       "fieldName": "quantity",
@@ -16,39 +22,33 @@
     {
       "fieldName": "status",
       "fieldType": "OrderItemStatus",
-      "fieldValues": "AVAILABLE,OUT_OF_STOCK,BACK_ORDER",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": ["required"],
+      "fieldValues": "AVAILABLE,OUT_OF_STOCK,BACK_ORDER"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "product",
+  "name": "OrderItem",
+  "pagination": "pagination",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
       "otherEntityName": "product",
       "otherEntityRelationshipName": "orderItem",
-      "relationshipValidateRules": "required",
       "relationshipName": "product",
-      "otherEntityField": "name"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     },
     {
-      "relationshipType": "many-to-one",
+      "otherEntityField": "code",
       "otherEntityName": "productOrder",
       "otherEntityRelationshipName": "orderItem",
-      "relationshipValidateRules": "required",
       "relationshipName": "order",
-      "otherEntityField": "code"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
-  "entityTableName": "order_item",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["store", "product"],
-  "microserviceName": "product",
-  "clientRootFolder": "product",
-  "databaseType": "sql",
-  "changelogDate": "20211216152909"
+  "service": "serviceClass"
 }

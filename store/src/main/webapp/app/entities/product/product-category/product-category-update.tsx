@@ -4,21 +4,22 @@ import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { getEntity, updateEntity, createEntity, reset } from './product-category.reducer';
-import { IProductCategory } from 'app/shared/model/product/product-category.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+
+import { IProductCategory } from 'app/shared/model/product/product-category.model';
+import { getEntity, updateEntity, createEntity, reset } from './product-category.reducer';
 
 export const ProductCategoryUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const productCategoryEntity = useAppSelector(state => state.productCategory.entity);
-  const loading = useAppSelector(state => state.productCategory.loading);
-  const updating = useAppSelector(state => state.productCategory.updating);
-  const updateSuccess = useAppSelector(state => state.productCategory.updateSuccess);
+  const productCategoryEntity = useAppSelector(state => state.store.productCategory.entity);
+  const loading = useAppSelector(state => state.store.productCategory.loading);
+  const updating = useAppSelector(state => state.store.productCategory.updating);
+  const updateSuccess = useAppSelector(state => state.store.productCategory.updateSuccess);
   const handleClose = () => {
     props.history.push('/product-category');
   };

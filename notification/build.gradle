@@ -29,7 +29,7 @@ description = ""
 
 sourceCompatibility=11
 targetCompatibility=11
-assert System.properties["java.specification.version"] == "11" || "12" || "13" || "14" || "15" || "16" || "17"
+assert System.properties["java.specification.version"] == "11" || "12" || "13" || "14" || "15" || "16" || "17" || "18"
 
 apply from: "gradle/docker.gradle"
 apply from: "gradle/sonar.gradle"
@@ -81,7 +81,7 @@ eclipse {
 defaultTasks "bootRun"
 
 springBoot {
-    mainClassName = "com.okta.developer.notification.NotificationApp"
+    mainClass = "com.okta.developer.notification.NotificationApp"
 }
 
 test {
@@ -157,7 +157,8 @@ configurations {
 }
 
 repositories {
-    mavenLocal()
+    // Local maven repository is required for libraries built locally with maven like development jhipster-bom.
+    // mavenLocal()
     mavenCentral()
     //jhipster-needle-gradle-repositories - JHipster will add additional repositories
 }
@@ -185,6 +186,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-logging"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
+    testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.testcontainers:testcontainers"
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation ("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
@@ -197,15 +200,15 @@ dependencies {
     implementation "org.springframework.retry:spring-retry"
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
     implementation "org.springframework.security:spring-security-config"
-    implementation "org.springframework.security:spring-security-data"
     implementation "org.springframework.security:spring-security-web"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-    implementation "com.github.cloudyrock.mongock:mongock-spring-v5"
-    implementation "com.github.cloudyrock.mongock:mongodb-springdata-v3-driver"
-    implementation ("io.springfox:springfox-oas")
-    implementation ("io.springfox:springfox-swagger2")
-    implementation "io.springfox:springfox-bean-validators"
+    implementation "io.mongock:mongock-springboot"
+    implementation "io.mongock:mongodb-springdata-v3-driver"
+    testImplementation "org.testcontainers:mongodb"
+    // Mongo db driver was excluded from starter, adding manually
+    implementation "org.mongodb:mongodb-driver-sync"
+    implementation ("org.springdoc:springdoc-openapi-webmvc-core")
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
@@ -214,7 +217,6 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-test"
     testImplementation "com.tngtech.archunit:archunit-junit5-api:${archunitJunit5Version}"
     testRuntimeOnly "com.tngtech.archunit:archunit-junit5-engine:${archunitJunit5Version}"
-    testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo"
     developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
@@ -236,8 +238,9 @@ task cleanResources(type: Delete) {
 }
 
 wrapper {
-    gradleVersion = "7.0.2"
+    gradleVersion = "7.4.2"
 }
+
 
 compileJava.dependsOn processResources
 processResources.dependsOn bootBuildInfo
