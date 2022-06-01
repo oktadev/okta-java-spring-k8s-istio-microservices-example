@@ -22,10 +22,10 @@ logSummary() {
     echo ""
         echo "#####################################################"
         echo "Please find the below useful endpoints,"
-        echo "Gateway - http://store.jhipster.34.141.190.82.nip.io"
-        echo "Zipkin - http://zipkin.istio-system.34.141.190.82.nip.io"
-        echo "Grafana - http://grafana.istio-system.34.141.190.82.nip.io"
-        echo "Kiali - http://kiali.istio-system.34.141.190.82.nip.io"
+        echo "Gateway - http://store.jhipster.34.76.233.160.nip.io"
+        echo "Zipkin - http://zipkin.istio-system.34.76.233.160.nip.io"
+        echo "Grafana - http://grafana.istio-system.34.76.233.160.nip.io"
+        echo "Kiali - http://kiali.istio-system.34.76.233.160.nip.io"
         echo "#####################################################"
 }
 

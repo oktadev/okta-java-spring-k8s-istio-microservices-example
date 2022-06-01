@@ -7,7 +7,7 @@ metadata:
     app: invoice-postgresql
 type: Opaque
 data:
-  postgresql-password: ODI4NjU5ODkxNjJhNjQ5NDliNmZhYjk1YTYwOGFjMTg1NGJlYjhjZmUxZGZkZGQxNDc2MzM3ZjIxYWFl
+  postgresql-password: ZWZhOGZkYWFhMmVkOTQyNGE4ZWVhYzI0Zjc5MzhjOWFhOTMwYWY2ZGVkZWJjMGYwMzAwMThiZTZjZWE1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,7 +31,7 @@ spec:
           emptyDir: {}
       containers:
         - name: postgres
-          image: postgres:13.5
+          image: postgres:14.2
           env:
             - name: POSTGRES_USER
               value: invoice

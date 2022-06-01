@@ -11,6 +11,6 @@ deployment {
   istio true
   kubernetesServiceType Ingress
   kubernetesNamespace jhipster
-  ingressDomain "34.141.190.82.nip.io"
+  ingressDomain "34.76.233.160.nip.io"
   ingressType gke
 }

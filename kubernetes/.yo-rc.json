@@ -1,20 +1,20 @@
 {
   "generator-jhipster": {
     "appsFolders": ["store", "invoice", "notification", "product"],
-    "directoryPath": "../",
     "clusteredDbApps": [],
-    "serviceDiscoveryType": false,
-    "dockerRepositoryName": "deepu105",
+    "deploymentType": "kubernetes",
+    "directoryPath": "../",
     "dockerPushCommand": "docker push",
+    "dockerRepositoryName": "deepu105",
+    "ingressDomain": "34.76.233.160.nip.io",
+    "ingressType": "gke",
+    "istio": true,
+    "jwtSecretKey": "ZjU3ODNmZWQyN2YyYTM0NGNkYzBhYTRkOGZmYTQ3NTBhM2RlMzNjZTMwODRjYmM0MGRkOGVhZjM3NDdiZmViMGZmMDdkMzA1ZWE3Y2Q1YjQ2MzM4OTA2MmUxMzA4NmM0YmZjOQ==",
     "kubernetesNamespace": "jhipster",
     "kubernetesServiceType": "Ingress",
-    "kubernetesUseDynamicStorage": false,
     "kubernetesStorageClassName": "",
-    "ingressDomain": "34.141.190.82.nip.io",
+    "kubernetesUseDynamicStorage": false,
     "monitoring": "no",
-    "istio": true,
-    "deploymentType": "kubernetes",
-    "ingressType": "gke",
-    "jwtSecretKey": "ZjU3ODNmZWQyN2YyYTM0NGNkYzBhYTRkOGZmYTQ3NTBhM2RlMzNjZTMwODRjYmM0MGRkOGVhZjM3NDdiZmViMGZmMDdkMzA1ZWE3Y2Q1YjQ2MzM4OTA2MmUxMzA4NmM0YmZjOQ=="
+    "serviceDiscoveryType": false
   }
 }
