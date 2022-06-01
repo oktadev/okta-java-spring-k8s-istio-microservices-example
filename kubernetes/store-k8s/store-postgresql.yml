@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: store-postgresql
+  namespace: jhipster
+  labels:
+    app: store-postgresql
+type: Opaque
+data:
+  postgresql-password: ZjA4MjI3MDI0ZmU2OWQzOWVkM2U2YWM3ODliOTVlYTRlYmE1MzhiYjFjMDI0MTUwYWVkNTg3MmNiZDE4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-postgresql
+  namespace: jhipster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store-postgresql
+  template:
+    metadata:
+      labels:
+        app: store-postgresql
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      volumes:
+        - name: data
+          emptyDir: {}
+      containers:
+        - name: postgres
+          image: postgres:14.2
+          env:
+            - name: POSTGRES_USER
+              value: store
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: store-postgresql
+                  key: postgresql-password
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: store-postgresql
+  namespace: jhipster
+spec:
+  selector:
+    app: store-postgresql
+  ports:
+    - port: 5432

@@ -1,0 +1,20 @@
+{
+  "generator-jhipster": {
+    "appsFolders": ["store", "invoice", "notification", "product"],
+    "clusteredDbApps": [],
+    "deploymentType": "kubernetes",
+    "directoryPath": "../",
+    "dockerPushCommand": "docker push",
+    "dockerRepositoryName": "deepu105",
+    "ingressDomain": "34.76.233.160.nip.io",
+    "ingressType": "gke",
+    "istio": true,
+    "jwtSecretKey": "ZGFkYzUzNDcxMWI3NTgzODViNTNiOTg4NzRiNzJjOTM4MWMwZjFlYmYzNTQ0ZTFmYTBiMWY3ZTliNWE1NjEzZDlhZTBiYTI2YTM1MDZlNzJhZGE2NjJkYTNmNjVmYjdkNjdlOQ==",
+    "kubernetesNamespace": "jhipster",
+    "kubernetesServiceType": "Ingress",
+    "kubernetesStorageClassName": "",
+    "kubernetesUseDynamicStorage": false,
+    "monitoring": "no",
+    "serviceDiscoveryType": false
+  }
+}
