@@ -46,7 +46,7 @@ spec:
               done
       containers:
         - name: product-app
-          image: deepu105/product
+          image: deepu105/product-istio
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: prod

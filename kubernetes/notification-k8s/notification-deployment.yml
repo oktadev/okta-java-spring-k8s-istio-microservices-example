@@ -46,7 +46,7 @@ spec:
               done
       containers:
         - name: notification-app
-          image: deepu105/notification
+          image: deepu105/notification-istio
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: prod

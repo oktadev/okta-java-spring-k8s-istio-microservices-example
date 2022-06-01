@@ -46,7 +46,7 @@ spec:
               done
       containers:
         - name: invoice-app
-          image: deepu105/invoice
+          image: deepu105/invoice-istio
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: prod
