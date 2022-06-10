@@ -1,6 +1,6 @@
 # Cloud Native Java Microservices with Spring Boot, Istio, Kubernetes and JHipster
 
-This is an example application accompanying the blog post [Cloud Native Java Microservices with JHipster and Istio]() on the Okta dev blog.
+This is an example application accompanying the blog post [Cloud Native Java Microservices with JHipster and Istio](https://developer.okta.com/blog/2022/06/09/cloud-native-java-microservices-with-istio) on the Okta dev blog.
 
 **Pre-requisites**
 
